@@ -1,0 +1,156 @@
+/* Editorial Grid Background */
+    .bg-grid-pattern {
+      background-size: 36px 36px;
+      background-image: 
+        linear-gradient(to right, rgba(161, 161, 170, 0.08) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(161, 161, 170, 0.08) 1px, transparent 1px);
+    }
+    .dark .bg-grid-pattern {
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    }
+
+    /* Scroll Reveal Animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Subtle Code Syntax Highlighting */
+    .tok-kw { color: #c084fc; }
+    .tok-fn { color: #60a5fa; }
+    .tok-str { color: #34d399; }
+    .tok-num { color: #fbbf24; }
+    .tok-type { color: #f472b6; }
+    .tok-cm { color: #71717a; font-style: italic; }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(113, 113, 122, 0.35);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(99, 102, 241, 0.6);
+    }
+
+    /* =========================================================
+       NAVBAR LINK UNDERLINE EFFECT (HOVER & ACTIVE)
+    ========================================================== */
+    .nav-link {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      padding: 0.5rem 0.875rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #71717a;
+      transition: color 0.25s ease;
+    }
+    .dark .nav-link {
+      color: #a1a1aa;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 50%;
+      width: 0;
+      height: 2.5px;
+      background: linear-gradient(90deg, #6366f1, #818cf8);
+      border-radius: 9999px;
+      transition: width 0.28s cubic-bezier(0.16, 1, 0.3, 1), left 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateX(-50%);
+      opacity: 0;
+    }
+    .nav-link:hover {
+      color: #09090b;
+    }
+    .dark .nav-link:hover {
+      color: #ffffff;
+    }
+    .nav-link:hover::after {
+      width: 80%;
+      opacity: 1;
+    }
+    .nav-link.active {
+      color: #4f46e5;
+      font-weight: 600;
+    }
+    .dark .nav-link.active {
+      color: #ffffff;
+      font-weight: 600;
+    }
+    .nav-link.active::after {
+      width: 85%;
+      opacity: 1;
+      background: #6366f1;
+      box-shadow: 0 0 12px rgba(99, 102, 241, 0.7);
+    }
+
+    /* Mobile Nav Link Active State */
+    .mobile-nav-link {
+      position: relative;
+      transition: all 0.2s ease;
+    }
+    .mobile-nav-link.active {
+      background-color: rgba(99, 102, 241, 0.12);
+      color: #6366f1;
+      font-weight: 600;
+      border-left: 3px solid #6366f1;
+    }
+    .dark .mobile-nav-link.active {
+      background-color: rgba(99, 102, 241, 0.2);
+      color: #818cf8;
+      border-left: 3px solid #818cf8;
+    }
+
+    /* =========================================================
+       IMAGE LIGHTBOX MODAL (SCALE & CENTER VIEWPORT)
+    ========================================================== */
+    .cursor-zoom-in {
+      cursor: zoom-in;
+    }
+    .cursor-zoom-out {
+      cursor: zoom-out;
+    }
+    #imageModal {
+      background-color: rgba(24, 24, 27, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    #imageModal.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    #imageModal.active #imageModalContent {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    /* Telegram QR Code Modal */
+    #telegramQrModal {
+      background-color: rgba(24, 24, 27, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    #telegramQrModal.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    #telegramQrModal.active #telegramQrContent {
+      transform: scale(1);
+      opacity: 1;
+    }

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Doune Memgsreng — Full-Stack Web Developer</title>
+  <meta name="description" content="Portfolio of Doune Memgsreng — Full-Stack Web Developer building fast, responsive, and scalable web applications from frontend interfaces to production backend systems." />
+
+  <!-- Google Fonts: Space Grotesk (Display), Inter (Body), JetBrains Mono (Code/Meta) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"Space Grotesk"', 'sans-serif'],
+            sans: ['"Inter"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            obsidian: '#09090B',
+            surface: '#111115',
+            accent: {
+              DEFAULT: '#6366F1',
+              light: '#818CF8',
+              dark: '#4F46E5',
+            },
+          },
+          boxShadow: {
+            'glow': '0 0 40px -10px rgba(99, 102, 241, 0.35)',
+            'card-dark': '0 10px 30px -15px rgba(0, 0, 0, 0.7)',
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="bg-zinc-50 text-zinc-900 dark:bg-obsidian dark:text-zinc-100 font-sans antialiased selection:bg-indigo-500/30 selection:text-indigo-200 transition-colors duration-300 overflow-x-hidden">
+
+  <!-- Ambient Top Gradient Glow -->
+  <div class="pointer-events-none fixed inset-x-0 top-0 -z-10 h-[520px] overflow-hidden">
+    <div class="absolute left-1/2 top-[-140px] -translate-x-1/2 w-[780px] h-[360px] rounded-full bg-indigo-500/15 dark:bg-indigo-500/12 blur-[120px]"></div>
+    <div class="absolute right-[-80px] top-[60px] w-[360px] h-[360px] rounded-full bg-emerald-500/10 dark:bg-emerald-500/8 blur-[110px]"></div>
+  </div>
+
+  <!-- =========================================================
+       1. STICKY NAVIGATION BAR (Source: parts/navbar.html)
+  ========================================================== -->
+  <!-- @include parts/navbar.html -->
+
+  <main id="top" class="relative">
+    <!-- =========================================================
+         2. HERO SECTION (Source: parts/hero.html)
+    ========================================================== -->
+    <!-- @include parts/hero.html -->
+
+    <!-- =========================================================
+         3. SELECTED WORK (Source: parts/work.html)
+    ========================================================== -->
+    <!-- @include parts/work.html -->
+
+    <!-- =========================================================
+         4. DEVELOPMENT WORKFLOW (Source: parts/process.html)
+    ========================================================== -->
+    <!-- @include parts/process.html -->
+
+    <!-- =========================================================
+         5. SKILLS & TECH STACK (Source: parts/stack.html)
+    ========================================================== -->
+    <!-- @include parts/stack.html -->
+
+    <!-- =========================================================
+         6. ABOUT & EXPERIENCE (Source: parts/about.html)
+    ========================================================== -->
+    <!-- @include parts/about.html -->
+
+    <!-- =========================================================
+         7. CONTACT SECTION (Source: parts/contact.html)
+    ========================================================== -->
+    <!-- @include parts/contact.html -->
+  </main>
+
+  <!-- =========================================================
+       FOOTER (Source: parts/footer.html)
+  ========================================================== -->
+  <!-- @include parts/footer.html -->
+
+  <!-- =========================================================
+       MODALS & TOAST (Source: parts/modals.html)
+  ========================================================== -->
+  <!-- @include parts/modals.html -->
+
+  <!-- Application JavaScript -->
+  <script src="js/main.js"></script>
+</body>
+</html>

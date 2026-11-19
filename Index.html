@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Doune Memgsreng — Full-Stack Web Developer</title>
+  <meta name="description" content="Portfolio of Doune Memgsreng — Full-Stack Web Developer building fast, responsive, and scalable web applications from frontend interfaces to production backend systems." />
+
+  <!-- Google Fonts: Space Grotesk (Display), Inter (Body), JetBrains Mono (Code/Meta) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"Space Grotesk"', 'sans-serif'],
+            sans: ['"Inter"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            obsidian: '#09090B',
+            surface: '#111115',
+            accent: {
+              DEFAULT: '#6366F1',
+              light: '#818CF8',
+              dark: '#4F46E5',
+            },
+          },
+          boxShadow: {
+            'glow': '0 0 40px -10px rgba(99, 102, 241, 0.35)',
+            'card-dark': '0 10px 30px -15px rgba(0, 0, 0, 0.7)',
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="bg-zinc-50 text-zinc-900 dark:bg-obsidian dark:text-zinc-100 font-sans antialiased selection:bg-indigo-500/30 selection:text-indigo-200 transition-colors duration-300 overflow-x-hidden">
+
+  <!-- Ambient Top Gradient Glow -->
+  <div class="pointer-events-none fixed inset-x-0 top-0 -z-10 h-[520px] overflow-hidden">
+    <div class="absolute left-1/2 top-[-140px] -translate-x-1/2 w-[780px] h-[360px] rounded-full bg-indigo-500/15 dark:bg-indigo-500/12 blur-[120px]"></div>
+    <div class="absolute right-[-80px] top-[60px] w-[360px] h-[360px] rounded-full bg-emerald-500/10 dark:bg-emerald-500/8 blur-[110px]"></div>
+  </div>
+
+  <!-- =========================================================
+       1. STICKY NAVIGATION BAR (Source: parts/navbar.html)
+  ========================================================== -->
+  <!-- =========================================================
+       1. STICKY NAVIGATION BAR (WITH HOVER & ACTIVE UNDERLINE)
+  ========================================================== -->
+  <header id="navbar" class="sticky top-0 z-40 w-full border-b border-zinc-200/80 dark:border-zinc-800/70 bg-white/80 dark:bg-obsidian/80 backdrop-blur-xl transition-colors duration-300">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <!-- Brand Mark -->
+      <div class="flex items-center gap-2.5">
+        <button type="button" 
+                id="brandAvatarBtn" 
+                aria-label="View profile photo full size" 
+                title="Click to view full photo" 
+                class="flex items-center justify-center w-9 h-9 rounded-xl bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-950 font-display font-bold text-sm tracking-tight shadow-sm hover:ring-2 hover:ring-indigo-500/80 hover:scale-105 active:scale-95 transition-all cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          <img src="./profile/pf.PNG" alt="Doune Memgsreng profile" class="w-7 h-7 rounded-full object-cover pointer-events-none" />
+        </button>
+        <a href="#top" class="group hidden sm:flex flex-col leading-none focus:outline-none">
+          <span class="font-display font-semibold text-sm tracking-tight text-zinc-900 dark:text-zinc-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">Doune Memgsreng</span>
+          <span class="font-mono text-[10px] text-zinc-500 dark:text-zinc-400 mt-0.5">Full-Stack Developer</span>
+        </a>
+      </div>
+
+      <!-- Desktop Navigation Links (with animated hover & active underline) -->
+      <nav aria-label="Primary" class="hidden md:flex items-center gap-1.5" id="desktopNav">
+        <a href="#work" class="nav-link">Work</a>
+        <a href="#process" class="nav-link">Process</a>
+        <a href="#stack" class="nav-link">Stack</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <!-- Right Controls: Theme Toggle + CTA + Mobile Menu -->
+      <div class="flex items-center gap-2.5">
+        <!-- Theme Toggle Button -->
+        <button id="themeToggle" type="button" aria-label="Toggle Dark and Light Mode" class="p-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-900/80 text-zinc-700 dark:text-zinc-300 hover:border-indigo-500/50 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all">
+          <!-- Sun Icon (shown in dark mode) -->
+          <svg id="iconSun" class="w-4 h-4 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+          <!-- Moon Icon (shown in light mode) -->
+          <svg id="iconMoon" class="w-4 h-4 block dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </button>
+
+        <!-- Desktop CTA -->
+        <a href="#contact" class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 text-sm font-medium hover:bg-indigo-600 dark:hover:bg-indigo-400 dark:hover:text-zinc-950 transition-all shadow-sm">
+          <span>Let's Talk</span>
+          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobileMenuBtn" type="button" aria-label="Open navigation menu" aria-expanded="false" class="md:hidden p-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-900/80 text-zinc-700 dark:text-zinc-300">
+          <svg id="menuIconOpen" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <svg id="menuIconClose" class="w-5 h-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobileDrawer" class="hidden md:hidden border-t border-zinc-200 dark:border-zinc-800 bg-white/95 dark:bg-obsidian/95 backdrop-blur-xl px-4 pt-3 pb-5 space-y-1.5">
+      <a href="#work" class="mobile-nav-link block px-3.5 py-2.5 rounded-xl text-base font-medium text-zinc-700 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800/70">Work</a>
+      <a href="#process" class="mobile-nav-link block px-3.5 py-2.5 rounded-xl text-base font-medium text-zinc-700 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800/70">Process</a>
+      <a href="#stack" class="mobile-nav-link block px-3.5 py-2.5 rounded-xl text-base font-medium text-zinc-700 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800/70">Stack</a>
+      <a href="#about" class="mobile-nav-link block px-3.5 py-2.5 rounded-xl text-base font-medium text-zinc-700 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800/70">About</a>
+      <a href="#contact" class="mobile-nav-link block px-3.5 py-2.5 rounded-xl text-base font-medium text-zinc-700 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800/70">Contact</a>
+      <div class="pt-2">
+        <a href="#contact" class="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-xl bg-indigo-600 text-white text-sm font-medium">
+          Let's Talk
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top" class="relative">
+    <!-- =========================================================
+         2. HERO SECTION (Source: parts/hero.html)
+    ========================================================== -->
+    <!-- =========================================================
+         2. HERO SECTION + INTERACTIVE CODE & PREVIEW
+    ========================================================== -->
+    <section class="relative bg-grid-pattern border-b border-zinc-200/80 dark:border-zinc-800/70">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-28">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
+
+          <!-- Left Column: Bio & Intro -->
+          <div class="lg:col-span-6 space-y-6">
+            <!-- Availability Pill -->
+            <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 text-xs font-mono font-medium">
+              <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              Available for opportunities • Phnom Penh / Remote
+            </div>
+
+            <!-- Headline -->
+            <h1 class="font-display text-4xl sm:text-5xl lg:text-[3.35rem] font-bold tracking-tight leading-[1.08] text-zinc-950 dark:text-white">
+              Full-Stack Engineer.<br />
+              <span class="bg-gradient-to-r from-indigo-500 via-violet-500 to-emerald-400 bg-clip-text text-transparent">Web Developer.</span>
+            </h1>
+
+            <!-- Value Proposition -->
+            <p class="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-xl">
+              I'm <strong class="font-semibold text-zinc-900 dark:text-zinc-100">Doune Memgsreng</strong>—a Full-Stack Web Developer focused on building fast, responsive, and resilient web applications. From interactive frontend interfaces to scalable backend APIs and database architectures, I ship clean and maintainable production code.
+            </p>
+
+            <!-- Hero CTAs -->
+            <div class="flex flex-wrap items-center gap-3.5 pt-2">
+              <a href="#work" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium shadow-glow transition-all active:scale-[0.98]">
+                <span>View Selected Work</span>
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </a>
+              <a href="#contact" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl border border-zinc-300 dark:border-zinc-700 bg-white/80 dark:bg-zinc-900/80 hover:border-indigo-500/60 text-zinc-900 dark:text-zinc-100 text-sm font-medium transition-all active:scale-[0.98]">
+                <span>Contact Me</span>
+              </a>
+            </div>
+
+            <!-- Quick Discipline Metadata -->
+            <div class="pt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs font-mono text-zinc-500 dark:text-zinc-400">
+              <span class="flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span> Modern Web Apps
+              </span>
+              <span class="flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> React &amp; Next.js
+              </span>
+              <span class="flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-violet-500"></span> Node, Docker &amp; APIs
+              </span>
+            </div>
+          </div>
+
+          <!-- Right Column: Interactive Developer Card -->
+          <div class="lg:col-span-6">
+            <div class="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white/90 dark:bg-surface/90 backdrop-blur-xl shadow-xl dark:shadow-card-dark overflow-hidden">
+              <!-- Card Header & Perspective Switcher -->
+              <div class="px-4 sm:px-5 py-3.5 border-b border-zinc-200 dark:border-zinc-800 flex flex-wrap items-center justify-between gap-3 bg-zinc-50/80 dark:bg-zinc-900/60">
+                <div class="flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-rose-500/80"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
+                  <span class="ml-1.5 font-mono text-[11px] text-zinc-500 dark:text-zinc-400">DeployCard.tsx</span>
+                </div>
+
+                <!-- Segmented Switcher -->
+                <div role="tablist" aria-label="Perspective Switcher" class="inline-flex p-1 rounded-xl bg-zinc-200/80 dark:bg-zinc-950 border border-zinc-300/60 dark:border-zinc-800">
+                  <button id="btnViewPreview" role="tab" aria-selected="true" type="button" class="px-3 py-1.5 rounded-lg text-xs font-medium transition-all bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white shadow-sm flex items-center gap-1.5">
+                    <svg class="w-3.5 h-3.5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                    Live Preview
+                  </button>
+                  <button id="btnViewCode" role="tab" aria-selected="false" type="button" class="px-3 py-1.5 rounded-lg text-xs font-medium transition-all text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 flex items-center gap-1.5">
+                    <svg class="w-3.5 h-3.5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                    </svg>
+                    Code Architecture
+                  </button>
+                </div>
+              </div>
+
+              <!-- VIEW 1: LIVE COMPONENT PREVIEW -->
+              <div id="panelPreview" class="p-5 sm:p-6 space-y-5">
+                <!-- Actual Live Component -->
+                <div class="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-950/80 p-5 shadow-sm">
+                  <div class="flex items-center justify-between mb-4">
+                    <div>
+                      <p class="font-mono text-[11px] uppercase tracking-wider text-indigo-500">Cluster • us-east-1</p>
+                      <h3 class="font-display font-semibold text-base text-zinc-900 dark:text-white mt-0.5">Edge API Gateway</h3>
+                    </div>
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 text-[11px] font-mono">
+                      <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> 99.98% Uptime
+                    </span>
+                  </div>
+
+                  <div class="grid grid-cols-3 gap-3">
+                    <div class="rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200/70 dark:border-zinc-800 p-2.5">
+                      <span class="block text-[10px] font-mono text-zinc-500">P95 Latency</span>
+                      <span class="font-display font-bold text-sm text-zinc-900 dark:text-white">24ms</span>
+                    </div>
+                    <div class="rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200/70 dark:border-zinc-800 p-2.5">
+                      <span class="block text-[10px] font-mono text-zinc-500">Containers</span>
+                      <span class="font-display font-bold text-sm text-zinc-900 dark:text-white">12 / 12</span>
+                    </div>
+                    <div class="rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200/70 dark:border-zinc-800 p-2.5">
+                      <span class="block text-[10px] font-mono text-zinc-500">Throughput</span>
+                      <span class="font-display font-bold text-sm text-indigo-500">4.8k req/s</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Server & Runtime Telemetry -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+                  <div class="rounded-xl border border-zinc-200 dark:border-zinc-800 p-3.5 bg-zinc-50/70 dark:bg-zinc-900/50">
+                    <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">Runtime Stack</p>
+                    <div class="flex items-center gap-2 flex-wrap">
+                      <span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-mono text-xs">Node.js 20</span>
+                      <span class="px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 font-mono text-xs">Next.js 20</span>
+                      <span class="px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 font-mono text-xs">Docker</span>
+                    </div>
+                  </div>
+
+                  <div class="rounded-xl border border-zinc-200 dark:border-zinc-800 p-3.5 bg-zinc-50/70 dark:bg-zinc-900/50">
+                    <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">Memory &amp; CPU</p>
+                    <div class="space-y-1">
+                      <div class="flex items-center justify-between text-xs font-mono">
+                        <span class="text-zinc-500">Memory</span>
+                        <span class="text-zinc-800 dark:text-zinc-200">142MB / 512MB</span>
+                      </div>
+                      <div class="w-full bg-zinc-200 dark:bg-zinc-800 h-1.5 rounded-full overflow-hidden">
+                        <div class="bg-indigo-500 h-full rounded-full" style="width: 28%"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- VIEW 2: FULL-STACK CODE VIEW -->
+              <div id="panelCode" class="hidden bg-[#0c0c10] text-zinc-200">
+                <!-- Code File Tabs -->
+                <div class="flex items-center justify-between px-4 py-2 border-b border-zinc-800/90 bg-zinc-950/80">
+                  <div class="flex items-center gap-1.5 overflow-x-auto">
+                    <button type="button" data-codetab="tsx" class="code-tab-btn px-2.5 py-1 rounded-md text-[11px] font-mono bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">DeployCard.tsx</button>
+                    <button type="button" data-codetab="api" class="code-tab-btn px-2.5 py-1 rounded-md text-[11px] font-mono text-zinc-400 hover:text-zinc-200 border border-transparent">metrics.route.ts</button>
+                    <button type="button" data-codetab="docker" class="code-tab-btn px-2.5 py-1 rounded-md text-[11px] font-mono text-zinc-400 hover:text-zinc-200 border border-transparent">Dockerfile</button>
+                  </div>
+                  <button id="copyCodeBtn" type="button" class="text-[11px] font-mono text-zinc-400 hover:text-white px-2 py-1 rounded hover:bg-zinc-800 transition-colors">
+                    Copy
+                  </button>
+                </div>
+
+                <!-- Code Content -->
+                <div class="p-5 font-mono text-xs leading-relaxed overflow-x-auto min-h-[268px]">
+                  <pre id="codeBlockTsx"><code><span class="tok-cm">// Production React + TypeScript Component</span>
+<span class="tok-kw">export function</span> <span class="tok-fn">DeployCard</span>({ cluster }: { cluster: <span class="tok-type">ClusterMetrics</span> }) {
+  <span class="tok-kw">const</span> { data } = <span class="tok-fn">useStream</span>(<span class="tok-str">`/api/v1/clusters/${cluster.id}`</span>);
+
+  <span class="tok-kw">return</span> (
+    &lt;<span class="tok-type">Card</span> className=<span class="tok-str">"rounded-2xl p-5 border-zinc-800"</span>&gt;
+      &lt;<span class="tok-type">StatusHeader</span> region={data.region} uptime={data.uptime} /&gt;
+      &lt;<span class="tok-type">MetricGrid</span>
+        p95Latency={<span class="tok-str">`${data.p95}ms`</span>}
+        containers={<span class="tok-str">`${data.active}/${data.total}`</span>}
+        throughput={<span class="tok-str">`${data.rps}k/s`</span>}
+      /&gt;
+    &lt;/<span class="tok-type">Card</span>&gt;
+  );
+}</code></pre>
+
+                  <pre id="codeBlockApi" class="hidden"><code><span class="tok-cm">// Edge-cached Node/Next.js API Handler</span>
+<span class="tok-kw">export async function</span> <span class="tok-fn">GET</span>(req: <span class="tok-type">Request</span>) {
+  <span class="tok-kw">const</span> telemetry = <span class="tok-kw">await</span> dockerEngine.<span class="tok-fn">inspectCluster</span>({
+    region: <span class="tok-str">'us-east-1'</span>,
+    includeLatencyPercentiles: <span class="tok-kw">true</span>,
+  });
+
+  <span class="tok-kw">return</span> Response.<span class="tok-fn">json</span>({
+    uptime: <span class="tok-num">99.98</span>,
+    p95: telemetry.p95Ms,
+    active: telemetry.healthyPods,
+    rps: telemetry.requestsPerSec,
+  }, { headers: { <span class="tok-str">'Cache-Control'</span>: <span class="tok-str">'s-maxage=5'</span> } });
+}</code></pre>
+
+                  <pre id="codeBlockDocker" class="hidden"><code><span class="tok-cm"># Multi-stage production container build</span>
+<span class="tok-kw">FROM</span> node:20-alpine <span class="tok-kw">AS</span> builder
+<span class="tok-kw">WORKDIR</span> /app
+<span class="tok-kw">COPY</span> package*.json ./
+<span class="tok-kw">RUN</span> npm ci --ignore-scripts
+<span class="tok-kw">COPY</span> . .
+<span class="tok-kw">RUN</span> npm run build
+
+<span class="tok-kw">FROM</span> node:20-alpine <span class="tok-kw">AS</span> runner
+<span class="tok-kw">ENV</span> NODE_ENV=production
+<span class="tok-kw">COPY</span> --from=builder /app/.next/standalone ./
+<span class="tok-kw">EXPOSE</span> <span class="tok-num">3000</span>
+<span class="tok-kw">CMD</span> [<span class="tok-str">"node"</span>, <span class="tok-str">"server.js"</span>]</code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         3. SELECTED WORK (Source: parts/work.html)
+    ========================================================== -->
+    <!-- =========================================================
+         3. SELECTED WORK (CLEAN PROJECT CARDS + WEBSITE URL BUTTONS)
+    ========================================================== -->
+    <section id="work" class="py-20 sm:py-28 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="reveal mb-12">
+        <span class="font-mono text-xs uppercase tracking-widest text-indigo-500 font-medium">01 / Selected Work</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold tracking-tight mt-2 text-zinc-950 dark:text-white">
+          Crafted web apps, engineered to scale.
+        </h2>
+        <p class="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 mt-2.5 max-w-2xl">
+          A showcase of full-stack web applications, real-time analytics platforms, and developer tooling.
+        </p>
+      </div>
+
+      <!-- Project Cards Grid: Clean cards with direct website URL buttons -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-7">
+
+        <!-- ================= PROJECT CARD 1 ================= -->
+        <article class="reveal project-card group rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-surface overflow-hidden hover:border-indigo-500/60 hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-xl dark:hover:shadow-card-dark flex flex-col justify-between">
+          <!-- Visual Thumbnail -->
+          <div class="h-52 w-full border-b border-zinc-200/80 dark:border-zinc-800/80 overflow-hidden">
+            <div class="w-full h-full bg-gradient-to-br from-slate-900 via-indigo-950 to-zinc-950 p-5 flex flex-col justify-between relative overflow-hidden">
+              <div class="flex items-center justify-between text-[10px] font-mono text-indigo-300/80">
+                <span>PULSECLOUD // TELEMETRY</span>
+                <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">LIVE 24ms</span>
+              </div>
+              <svg viewBox="0 0 320 100" class="w-full h-24 mt-2">
+                <defs>
+                  <linearGradient id="pulseGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#6366F1" stop-opacity="0.45"/>
+                    <stop offset="100%" stop-color="#6366F1" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <path d="M0 78 L35 64 L70 70 L110 38 L150 48 L190 22 L235 34 L275 16 L320 28 L320 100 L0 100 Z" fill="url(#pulseGrad)"/>
+                <path d="M0 78 L35 64 L70 70 L110 38 L150 48 L190 22 L235 34 L275 16 L320 28" fill="none" stroke="#818CF8" stroke-width="2.5" stroke-linecap="round"/>
+                <circle cx="190" cy="22" r="4" fill="#10B981"/>
+                <circle cx="275" cy="16" r="4" fill="#818CF8"/>
+              </svg>
+              <div class="grid grid-cols-3 gap-2 pt-2">
+                <div class="rounded-lg bg-white/5 border border-white/10 px-2.5 py-1.5"><span class="block text-[9px] font-mono text-zinc-400">CPU</span><span class="text-xs font-mono text-white">34.2%</span></div>
+                <div class="rounded-lg bg-white/5 border border-white/10 px-2.5 py-1.5"><span class="block text-[9px] font-mono text-zinc-400">PODS</span><span class="text-xs font-mono text-emerald-400">128 OK</span></div>
+                <div class="rounded-lg bg-white/5 border border-white/10 px-2.5 py-1.5"><span class="block text-[9px] font-mono text-zinc-400">ERR</span><span class="text-xs font-mono text-white">0.01%</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card Content -->
+          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-2.5">
+                <span class="font-mono text-[11px] px-2.5 py-0.5 rounded-md bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 font-medium">Full-Stack Application</span>
+                <span class="font-mono text-[11px] text-emerald-600 dark:text-emerald-400">-42% MTTR • 12k+ Containers</span>
+              </div>
+              <h3 class="font-display text-xl font-bold text-zinc-950 dark:text-white group-hover:text-indigo-500 transition-colors">
+                PulseCloud — DevOps &amp; Container Analytics
+              </h3>
+              <p class="text-sm text-zinc-600 dark:text-zinc-400 mt-2 leading-relaxed">
+                Real-time Docker metrics dashboard and modular observability system built for high-density DevOps workflows, log streaming, and deployment rollbacks.
+              </p>
+            </div>
+
+            <!-- Tech Stack Tags -->
+            <div class="flex flex-wrap gap-1.5 pt-2">
+              <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-900 border border-zinc-200/60 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400">Next.js</span>
+              <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-900 border border-zinc-200/60 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400">TypeScript</span>
+              <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-900 border border-zinc-200/60 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400">Node.js</span>
+              <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-900 border border-zinc-200/60 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400">Docker</span>
+              <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-900 border border-zinc-200/60 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400">WebSockets</span>
+              <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-900 border border-zinc-200/60 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400">Tailwind CSS</span>
+            </div>
+
+            <!-- Card Action Footer: Space / Button for Website URL -->
+            <div class="pt-4 border-t border-zinc-100 dark:border-zinc-800/80 flex flex-wrap items-center justify-between gap-3">
+              <!-- ADD YOUR WEBSITE URL HERE: replace href="#" with your website URL -->
+              <a href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-medium transition-all shadow-sm hover:shadow-indigo-500/25 active:scale-[0.98]">
+                <span>Visit Website</span>
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+
+              <!-- Optional GitHub / Source Code link -->
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-zinc-200 dark:border-zinc-800 hover:border-indigo-500/50 bg-zinc-50 dark:bg-zinc-900/60 hover:text-indigo-500 text-zinc-700 dark:text-zinc-300 text-xs font-medium transition-all">
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                </svg>
+                <span>Source Code</span>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- ================= PROJECT CARD 2 ================= -->
+        <article class="reveal project-card group rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-surface overflow-hidden hover:border-indigo-500/60 hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-xl dark:hover:shadow-card-dark flex flex-col justify-between">
+          <!-- Visual Thumbnail -->
+          <div class="h-52 w-full border-b border-zinc-200/80 dark:border-zinc-800/80 overflow-hidden">
+            <div class="w-full h-full bg-gradient-to-br from-zinc-900 via-emerald-950/60 to-zinc-950 p-5 flex flex-col justify-between relative overflow-hidden">
+              <div class="flex items-center justify-between text-[10px] font-mono text-emerald-300/80">
+                <span>LOOMA STUDIO // LLAMA-3-8B-Q4</span>
+                <span class="px-2 py-0.5 rounded bg-white/10 text-zinc-200">74.6 tok/s</span>
+              </div>
+              <div class="space-y-2.5 my-auto py-3">
+                <div class="ml-auto max-w-[78%] rounded-xl rounded-tr-sm bg-indigo-500/25 border border-indigo-400/30 px-3 py-2 text-[11px] text-indigo-100 font-sans">
+                  Optimize this Docker multi-stage build for Alpine.
+                </div>
+                <div class="max-w-[88%] rounded-xl rounded-tl-sm bg-white/5 border border-white/10 px-3 py-2 text-[11px] text-zinc-300 font-mono">
+                  <span class="text-emerald-400">▸</span> Pruning devDependencies cuts image size by 68%...
+                  <span class="inline-block w-1.5 h-3 bg-emerald-400 ml-1 animate-pulse align-middle"></span>
+                </div>
+              </div>
+              <div class="flex items-center gap-2 text-[10px] font-mono text-zinc-400">
+                <span class="h-1.5 flex-1 rounded-full bg-zinc-800 overflow-hidden"><span class="block w-2/3 h-full bg-emerald-500 rounded-full"></span></span>
+                <span>VRAM 5.2 / 8GB</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card Content -->
+          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-2.5">
+                <span class="font-mono text-[11px] px-2.5 py-0.5 rounded-md bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 font-medium">AI &amp; Web Platform</span>
+                <span class="font-mono text-[11px] text-emerald-600 dark:text-emerald-400">60fps Streaming • 100% Local</span>
+              </div>
+              <h3 class="font-display text-xl font-bold text-zinc-950 dark:text-white group-hover:text-indigo-500 transition-colors">
+                Looma AI — Local LLM Studio Interface
+              </h3>
+              <p class="text-sm text-zinc-600 dark:text-zinc-400 mt-2 leading-relaxed">
+                Refined web client for managing, benchmarking, and streaming local open-weight LLM inference with prompt branching and live token/sec telemetry.
+              </p>
+            </div>
+
+            <!-- Tech Stack Tags -->
+            <div class="flex flex-wrap gap-1.5 pt-2">
+              <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-900 border border-zinc-200/60 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400">React</span>
+              <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-900 border border-zinc-200/60 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400">TypeScript</span>
+              <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-900 border border-zinc-200/60 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400">Node.js</span>
+              <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-900 border border-zinc-200/60 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400">WebAssembly</span>
+              <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-900 border border-zinc-200/60 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400">SSE</span>
+              <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-900 border border-zinc-200/60 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400">Tailwind CSS</span>
+            </div>
+
+            <!-- Card Action Footer: Space / Button for Website URL -->
+            <div class="pt-4 border-t border-zinc-100 dark:border-zinc-800/80 flex flex-wrap items-center justify-between gap-3">
+              <!-- ADD YOUR WEBSITE URL HERE: replace href="#" with your website URL -->
+              <a href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-medium transition-all shadow-sm hover:shadow-indigo-500/25 active:scale-[0.98]">
+                <span>Visit Website</span>
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+
+              <!-- Optional GitHub / Source Code link -->
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-zinc-200 dark:border-zinc-800 hover:border-indigo-500/50 bg-zinc-50 dark:bg-zinc-900/60 hover:text-indigo-500 text-zinc-700 dark:text-zinc-300 text-xs font-medium transition-all">
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                </svg>
+                <span>Source Code</span>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- ================= PROJECT CARD 3 ================= -->
+        <article class="reveal project-card group rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-surface overflow-hidden hover:border-indigo-500/60 hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-xl dark:hover:shadow-card-dark flex flex-col justify-between">
+          <!-- Visual Thumbnail -->
+          <div class="h-52 w-full border-b border-zinc-200/80 dark:border-zinc-800/80 overflow-hidden">
+            <div class="w-full h-full bg-gradient-to-br from-violet-950 via-zinc-900 to-indigo-950 p-5 flex flex-col justify-between relative overflow-hidden">
+              <div class="flex items-center justify-between text-[10px] font-mono text-violet-300/80">
+                <span>DEVFLOW // API &amp; PIPELINES</span>
+                <span class="px-2 py-0.5 rounded bg-violet-500/20 text-violet-200">100% Type-Safe</span>
+              </div>
+              <div class="grid grid-cols-3 gap-2.5 my-3">
+                <div class="p-2.5 rounded-xl bg-white/5 border border-white/10">
+                  <span class="block text-[9px] font-mono text-zinc-400">POSTGRESQL</span>
+                  <span class="text-xs font-mono text-violet-300">Prisma ORM</span>
+                </div>
+                <div class="p-2.5 rounded-xl bg-white/5 border border-white/10">
+                  <span class="block text-[9px] font-mono text-zinc-400">QUEUE</span>
+                  <span class="text-xs font-mono text-emerald-400">Redis Active</span>
+                </div>
+                <div class="p-2.5 rounded-xl bg-white/5 border border-white/10">
+                  <span class="block text-[9px] font-mono text-zinc-400">API</span>
+                  <span class="text-xs font-mono text-indigo-300">GraphQL / REST</span>
+                </div>
+              </div>
+              <div class="flex items-center justify-between text-[10px] font-mono text-zinc-400">
+                <span>Docker Orchestration</span>
+                <span class="text-emerald-400">Continuous Deploy</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card Content -->
+          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-2.5">
+                <span class="font-mono text-[11px] px-2.5 py-0.5 rounded-md bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 font-medium">Full-Stack Platform</span>
+                <span class="font-mono text-[11px] text-emerald-600 dark:text-emerald-400">Zero-Latency Sync</span>
+              </div>
+              <h3 class="font-display text-xl font-bold text-zinc-950 dark:text-white group-hover:text-indigo-500 transition-colors">
+                DevFlow — Task &amp; API Orchestration Platform
+              </h3>
+              <p class="text-sm text-zinc-600 dark:text-zinc-400 mt-2 leading-relaxed">
+                Developer productivity and workflow automation suite featuring webhooks, background jobs, database schema synchronization, and team activity streams.
+              </p>
+            </div>
+
+            <!-- Tech Stack Tags -->
+            <div class="flex flex-wrap gap-1.5 pt-2">
+              <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-900 border border-zinc-200/60 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400">React</span>
+              <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-900 border border-zinc-200/60 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400">TypeScript</span>
+              <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-900 border border-zinc-200/60 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400">Node.js</span>
+              <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-900 border border-zinc-200/60 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400">PostgreSQL</span>
+              <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-900 border border-zinc-200/60 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400">Prisma</span>
+              <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-900 border border-zinc-200/60 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400">Docker</span>
+            </div>
+
+            <!-- Card Action Footer: Space / Button for Website URL -->
+            <div class="pt-4 border-t border-zinc-100 dark:border-zinc-800/80 flex flex-wrap items-center justify-between gap-3">
+              <!-- ADD YOUR WEBSITE URL HERE: replace href="#" with your website URL -->
+              <a href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-medium transition-all shadow-sm hover:shadow-indigo-500/25 active:scale-[0.98]">
+                <span>Visit Website</span>
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+
+              <!-- Optional GitHub / Source Code link -->
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-zinc-200 dark:border-zinc-800 hover:border-indigo-500/50 bg-zinc-50 dark:bg-zinc-900/60 hover:text-indigo-500 text-zinc-700 dark:text-zinc-300 text-xs font-medium transition-all">
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                </svg>
+                <span>Source Code</span>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- ================= PROJECT CARD 4 ================= -->
+        <article class="reveal project-card group rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-surface overflow-hidden hover:border-indigo-500/60 hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-xl dark:hover:shadow-card-dark flex flex-col justify-between">
+          <!-- Visual Thumbnail -->
+          <div class="h-52 w-full border-b border-zinc-200/80 dark:border-zinc-800/80 overflow-hidden">
+            <div class="w-full h-full bg-gradient-to-br from-zinc-900 via-amber-950/35 to-zinc-950 p-5 flex flex-col justify-between relative overflow-hidden">
+              <div class="flex items-center justify-between text-[10px] font-mono text-amber-200/80">
+                <span>VELOCE // STOREFRONT</span>
+                <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">99 LIGHTHOUSE</span>
+              </div>
+              <div class="grid grid-cols-12 gap-3 items-center my-2">
+                <div class="col-span-7 rounded-xl bg-white/5 border border-white/10 p-3">
+                  <span class="font-mono text-[9px] text-amber-400">EDITION 04</span>
+                  <p class="font-display font-bold text-sm text-white mt-0.5">Aero Knit Runner</p>
+                  <p class="font-mono text-xs text-zinc-300 mt-1">$185.00</p>
+                </div>
+                <div class="col-span-5 rounded-xl bg-gradient-to-br from-amber-400/20 to-indigo-500/20 border border-white/10 h-20 flex items-center justify-center">
+                  <svg class="w-9 h-9 text-amber-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+              </div>
+              <div class="flex items-center justify-between text-[10px] font-mono text-zinc-400">
+                <span>Edge Cached • Vercel</span>
+                <span class="text-white">+34% Checkout Speed</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card Content -->
+          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-2.5">
+                <span class="font-mono text-[11px] px-2.5 py-0.5 rounded-md bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 font-medium">Full-Stack Storefront</span>
+                <span class="font-mono text-[11px] text-emerald-600 dark:text-emerald-400">Sub-second Latency</span>
+              </div>
+              <h3 class="font-display text-xl font-bold text-zinc-950 dark:text-white group-hover:text-indigo-500 transition-colors">
+                Veloce — Modern Headless E-Commerce
+              </h3>
+              <p class="text-sm text-zinc-600 dark:text-zinc-400 mt-2 leading-relaxed">
+                High-performance headless storefront deployed on Vercel featuring optimistic cart mutations, GraphQL product queries, and sub-second page loads.
+              </p>
+            </div>
+
+            <!-- Tech Stack Tags -->
+            <div class="flex flex-wrap gap-1.5 pt-2">
+              <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-900 border border-zinc-200/60 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400">Next.js</span>
+              <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-900 border border-zinc-200/60 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400">TypeScript</span>
+              <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-900 border border-zinc-200/60 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400">GraphQL</span>
+              <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-900 border border-zinc-200/60 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400">Vercel</span>
+              <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-900 border border-zinc-200/60 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400">Tailwind CSS</span>
+            </div>
+
+            <!-- Card Action Footer: Space / Button for Website URL -->
+            <div class="pt-4 border-t border-zinc-100 dark:border-zinc-800/80 flex flex-wrap items-center justify-between gap-3">
+              <!-- ADD YOUR WEBSITE URL HERE: replace href="#" with your website URL -->
+              <a href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-medium transition-all shadow-sm hover:shadow-indigo-500/25 active:scale-[0.98]">
+                <span>Visit Website</span>
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+
+              <!-- Optional GitHub / Source Code link -->
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-zinc-200 dark:border-zinc-800 hover:border-indigo-500/50 bg-zinc-50 dark:bg-zinc-900/60 hover:text-indigo-500 text-zinc-700 dark:text-zinc-300 text-xs font-medium transition-all">
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                </svg>
+                <span>Source Code</span>
+              </a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- =========================================================
+         4. DEVELOPMENT WORKFLOW (Source: parts/process.html)
+    ========================================================== -->
+    <!-- =========================================================
+         4. DEVELOPMENT WORKFLOW ('FROM CONCEPT TO PRODUCTION')
+    ========================================================== -->
+    <section id="process" class="py-20 sm:py-28 border-y border-zinc-200/80 dark:border-zinc-800/70 bg-zinc-100/60 dark:bg-zinc-900/30">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="reveal max-w-2xl mb-12">
+          <span class="font-mono text-xs uppercase tracking-widest text-indigo-500 font-medium">02 / Development Lifecycle</span>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold tracking-tight mt-2 text-zinc-950 dark:text-white">
+            From Concept to Production.
+          </h2>
+          <p class="text-zinc-600 dark:text-zinc-400 mt-3">
+            Hover or click any phase to inspect how full-stack features are planned, built, tested, and deployed to production.
+          </p>
+        </div>
+
+        <!-- 4-Step Interactive Strip -->
+        <div class="reveal grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6" id="processSteps">
+          <!-- Step 1 -->
+          <button type="button" data-step="0" class="process-step text-left p-5 rounded-2xl border-2 border-indigo-500 bg-white dark:bg-surface shadow-sm transition-all">
+            <div class="flex items-center justify-between mb-3">
+              <span class="font-mono text-xs font-semibold text-indigo-500">01</span>
+              <span class="w-2 h-2 rounded-full bg-indigo-500 step-dot"></span>
+            </div>
+            <h3 class="font-display font-semibold text-base text-zinc-950 dark:text-white">Architecture &amp; Planning</h3>
+            <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Data schemas, API contracts &amp; scope</p>
+          </button>
+
+          <!-- Step 2 -->
+          <button type="button" data-step="1" class="process-step text-left p-5 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white/70 dark:bg-surface/60 hover:border-indigo-500/50 transition-all">
+            <div class="flex items-center justify-between mb-3">
+              <span class="font-mono text-xs font-semibold text-zinc-400">02</span>
+              <span class="w-2 h-2 rounded-full bg-zinc-300 dark:bg-zinc-700 step-dot"></span>
+            </div>
+            <h3 class="font-display font-semibold text-base text-zinc-950 dark:text-white">Frontend Engineering</h3>
+            <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Component structure, state &amp; UI</p>
+          </button>
+
+          <!-- Step 3 -->
+          <button type="button" data-step="2" class="process-step text-left p-5 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white/70 dark:bg-surface/60 hover:border-indigo-500/50 transition-all">
+            <div class="flex items-center justify-between mb-3">
+              <span class="font-mono text-xs font-semibold text-zinc-400">03</span>
+              <span class="w-2 h-2 rounded-full bg-zinc-300 dark:bg-zinc-700 step-dot"></span>
+            </div>
+            <h3 class="font-display font-semibold text-base text-zinc-950 dark:text-white">Backend &amp; Services</h3>
+            <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">REST/GraphQL APIs &amp; databases</p>
+          </button>
+
+          <!-- Step 4 -->
+          <button type="button" data-step="3" class="process-step text-left p-5 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white/70 dark:bg-surface/60 hover:border-indigo-500/50 transition-all">
+            <div class="flex items-center justify-between mb-3">
+              <span class="font-mono text-xs font-semibold text-zinc-400">04</span>
+              <span class="w-2 h-2 rounded-full bg-zinc-300 dark:bg-zinc-700 step-dot"></span>
+            </div>
+            <h3 class="font-display font-semibold text-base text-zinc-950 dark:text-white">Containerize &amp; Deploy</h3>
+            <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Docker, CI/CD, Vercel &amp; monitoring</p>
+          </button>
+        </div>
+
+        <!-- Active Phase Detail Panel -->
+        <div id="processDetail" class="reveal rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-surface p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+          <div class="lg:col-span-7 space-y-3">
+            <span id="procBadge" class="inline-block font-mono text-[11px] px-2.5 py-1 rounded-md bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">Phase 01 • Architecture</span>
+            <h3 id="procTitle" class="font-display text-2xl font-bold text-zinc-950 dark:text-white">Architecture &amp; Planning</h3>
+            <p id="procDesc" class="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
+              Every build starts by defining clear API contracts, data models, and system constraints—ensuring that downstream code is modular, type-safe, and ready for high concurrency.
+            </p>
+          </div>
+          <div class="lg:col-span-5 rounded-xl bg-zinc-50 dark:bg-zinc-900/70 border border-zinc-200/80 dark:border-zinc-800 p-5">
+            <p class="font-mono text-[11px] uppercase tracking-wider text-zinc-500 mb-3">Key Deliverables</p>
+            <ul id="procDeliverables" class="space-y-2.5 text-sm text-zinc-700 dark:text-zinc-300">
+              <!-- Populated via JS -->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         5. SKILLS & TECH STACK (Source: parts/stack.html)
+    ========================================================== -->
+    <!-- =========================================================
+         5. SKILLS & TECH STACK (BENTO GRID - PURE ENGINEERING)
+    ========================================================== -->
+    <section id="stack" class="py-20 sm:py-28 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="reveal max-w-2xl mb-12">
+        <span class="font-mono text-xs uppercase tracking-widest text-indigo-500 font-medium">03 / Capabilities</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold tracking-tight mt-2 text-zinc-950 dark:text-white">
+          Skills &amp; Tech Stack.
+        </h2>
+        <p class="text-zinc-600 dark:text-zinc-400 mt-3">
+          A modern full-stack development toolkit spanning frontend frameworks, backend microservices, databases, and DevOps.
+        </p>
+      </div>
+
+      <!-- Bento Grid -->
+      <div class="reveal grid grid-cols-1 md:grid-cols-12 gap-5">
+        <!-- Bento 1: Frontend Engineering -->
+        <div class="md:col-span-6 lg:col-span-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-surface p-6 sm:p-7 flex flex-col justify-between hover:border-indigo-500/40 transition-colors">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-indigo-500/15 text-indigo-500 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+              </svg>
+            </div>
+            <h3 class="font-display text-xl font-bold text-zinc-950 dark:text-white">Frontend Engineering</h3>
+            <p class="text-sm text-zinc-600 dark:text-zinc-400 mt-1.5 mb-5">Building 60fps, type-safe, and responsive web applications with clean component architecture and state management.</p>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono bg-indigo-500/10 border border-indigo-500/20 text-indigo-600 dark:text-indigo-300">React</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono bg-indigo-500/10 border border-indigo-500/20 text-indigo-600 dark:text-indigo-300">Next.js</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono bg-indigo-500/10 border border-indigo-500/20 text-indigo-600 dark:text-indigo-300">TypeScript</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono bg-zinc-100 dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200">JavaScript ES6+</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono bg-zinc-100 dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200">Tailwind CSS</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono bg-zinc-100 dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200">HTML5 / Modern CSS</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono bg-zinc-100 dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200">Vite / Webpack</span>
+          </div>
+        </div>
+
+        <!-- Bento 2: Backend Architecture & Databases -->
+        <div class="md:col-span-6 lg:col-span-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-surface p-6 sm:p-7 flex flex-col justify-between hover:border-emerald-500/40 transition-colors">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-emerald-500/15 text-emerald-500 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+              </svg>
+            </div>
+            <h3 class="font-display text-xl font-bold text-zinc-950 dark:text-white">Backend &amp; Databases</h3>
+            <p class="text-sm text-zinc-600 dark:text-zinc-400 mt-1.5 mb-5">Designing reliable REST and GraphQL APIs, managing relational and document databases, and implementing authentication.</p>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 dark:text-emerald-300">Node.js</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 dark:text-emerald-300">Express.js</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 dark:text-emerald-300">REST &amp; GraphQL</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono bg-zinc-100 dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200">PostgreSQL</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono bg-zinc-100 dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200">MongoDB</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono bg-zinc-100 dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200">Prisma ORM</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono bg-zinc-100 dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200">Postman</span>
+          </div>
+        </div>
+
+        <!-- Bento 3: DevOps & Cloud Infrastructure -->
+        <div class="md:col-span-8 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-surface p-6 sm:p-7 flex flex-col justify-between hover:border-violet-500/40 transition-colors">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-violet-500/15 text-violet-500 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+              </svg>
+            </div>
+            <h3 class="font-display text-xl font-bold text-zinc-950 dark:text-white">DevOps &amp; Infrastructure</h3>
+            <p class="text-sm text-zinc-600 dark:text-zinc-400 mt-1.5 mb-5">Containerizing services with multi-stage Docker builds, configuring CI/CD automation, edge caching, and monitoring production uptime.</p>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono bg-violet-500/10 border border-violet-500/20 text-violet-700 dark:text-violet-300">Docker</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono bg-violet-500/10 border border-violet-500/20 text-violet-700 dark:text-violet-300">GitHub Actions</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono bg-zinc-100 dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200">Vercel</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono bg-zinc-100 dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200">Linux / Bash</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono bg-zinc-100 dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200">WebSockets</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono bg-zinc-100 dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200">Git / GitHub</span>
+          </div>
+        </div>
+
+        <!-- Bento 4: Engineering Standards -->
+        <div class="md:col-span-4 rounded-2xl border border-indigo-500/30 bg-gradient-to-br from-indigo-600/10 via-violet-600/5 to-transparent dark:from-indigo-500/15 dark:via-zinc-900/80 dark:to-zinc-950 p-6 sm:p-7 flex flex-col justify-between">
+          <div>
+            <span class="font-mono text-[11px] uppercase tracking-wider text-indigo-500">Core Focus</span>
+            <h3 class="font-display text-lg font-bold text-zinc-950 dark:text-white mt-2">Scalable &amp; Clean Code</h3>
+            <p class="text-sm text-zinc-600 dark:text-zinc-400 mt-2 leading-relaxed">
+              Writing maintainable, type-safe code with modular architecture, strict error handling, and web performance optimization.
+            </p>
+          </div>
+          <div class="mt-5 pt-4 border-t border-zinc-200/70 dark:border-zinc-800/80 flex items-center justify-between font-mono text-xs text-zinc-500 dark:text-zinc-400">
+            <span>Type Safety &amp; APIs</span>
+            <span class="text-emerald-500 font-semibold">100% Validated</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         6. ABOUT & EXPERIENCE (Source: parts/about.html)
+    ========================================================== -->
+    <!-- =========================================================
+         6. ABOUT & EXPERIENCE
+    ========================================================== -->
+    <section id="about" class="py-20 sm:py-28 border-t border-zinc-200/80 dark:border-zinc-800/70 bg-zinc-100/50 dark:bg-zinc-900/20">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14">
+          <!-- Left: Personal Bio -->
+          <div class="reveal lg:col-span-5 space-y-5">
+            <span class="font-mono text-xs uppercase tracking-widest text-indigo-500 font-medium">04 / About Me</span>
+            <h2 class="font-display text-3xl sm:text-4xl font-bold tracking-tight text-zinc-950 dark:text-white">
+              Full-Stack Developer focused on building reliable web applications.
+            </h2>
+            <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed">
+              I'm Doune Memgsreng, a Phnom Penh-based Full-Stack Web Developer passionate about building high-performance web applications that are robust, responsive, and easy to maintain.
+            </p>
+            <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed">
+              My engineering approach spans the entire development lifecycle: crafting clean frontend user interfaces in React and Next.js, architecting scalable backend APIs in Node.js, managing databases, and containerizing deployments with Docker.
+            </p>
+
+            <!-- Compact Stats -->
+            <div class="grid grid-cols-3 gap-3 pt-3">
+              <div class="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-surface p-3.5">
+                <span class="block font-display text-xl font-bold text-zinc-950 dark:text-white">Full-Stack</span>
+                <span class="font-mono text-[10px] text-zinc-500">End-to-End</span>
+              </div>
+              <div class="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-surface p-3.5">
+                <span class="block font-display text-xl font-bold text-indigo-500">GMT+7</span>
+                <span class="font-mono text-[10px] text-zinc-500">Phnom Penh</span>
+              </div>
+              <div class="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-surface p-3.5">
+                <span class="block font-display text-xl font-bold text-emerald-500">Remote</span>
+                <span class="font-mono text-[10px] text-zinc-500">Global Ready</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Vertical Experience Timeline -->
+          <div class="reveal lg:col-span-7">
+            <div class="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-surface p-6 sm:p-8">
+              <h3 class="font-display text-lg font-bold text-zinc-950 dark:text-white mb-6">Experience &amp; Milestones</h3>
+
+              <ol class="relative border-l border-zinc-200 dark:border-zinc-800 ml-2.5 space-y-8">
+                <!-- Role 1 -->
+                <li class="pl-7 relative">
+                  <span class="absolute -left-[7px] top-1.5 w-3.5 h-3.5 rounded-full bg-indigo-500 ring-4 ring-white dark:ring-surface"></span>
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <h4 class="font-display font-semibold text-base text-zinc-950 dark:text-white">Full-Stack Web Developer</h4>
+                    <span class="font-mono text-xs px-2.5 py-0.5 rounded-md bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">2024 — Present</span>
+                  </div>
+                  <p class="font-mono text-xs text-zinc-500 mt-0.5">Independent Studio / Web Consulting</p>
+                  <p class="text-sm text-zinc-600 dark:text-zinc-400 mt-2 leading-relaxed">
+                    Engineering scalable web applications, responsive user interfaces, and robust backend services using Next.js, TypeScript, Node.js, and Docker-powered deployments.
+                  </p>
+                </li>
+
+                <!-- Role 2 -->
+                <li class="pl-7 relative">
+                  <span class="absolute -left-[7px] top-1.5 w-3.5 h-3.5 rounded-full bg-zinc-300 dark:bg-zinc-700 ring-4 ring-white dark:ring-surface"></span>
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <h4 class="font-display font-semibold text-base text-zinc-950 dark:text-white">Frontend Web Developer</h4>
+                    <span class="font-mono text-xs text-zinc-500">2022 — 2024</span>
+                  </div>
+                  <p class="font-mono text-xs text-zinc-500 mt-0.5">Digital Technology Agency • Phnom Penh</p>
+                  <p class="text-sm text-zinc-600 dark:text-zinc-400 mt-2 leading-relaxed">
+                    Developed responsive web applications and dashboards using React, TypeScript, and modern CSS frameworks, ensuring optimal rendering speed and clean API integrations.
+                  </p>
+                </li>
+
+                <!-- Role 3 -->
+                <li class="pl-7 relative">
+                  <span class="absolute -left-[7px] top-1.5 w-3.5 h-3.5 rounded-full bg-zinc-300 dark:bg-zinc-700 ring-4 ring-white dark:ring-surface"></span>
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <h4 class="font-display font-semibold text-base text-zinc-950 dark:text-white">Junior Web Developer</h4>
+                    <span class="font-mono text-xs text-zinc-500">2020 — 2022</span>
+                  </div>
+                  <p class="font-mono text-xs text-zinc-500 mt-0.5">Creative Tech Collective</p>
+                  <p class="text-sm text-zinc-600 dark:text-zinc-400 mt-2 leading-relaxed">
+                    Built responsive web pages, integrated client interfaces with RESTful APIs, and maintained code standards with semantic HTML5, CSS3, and modern JavaScript.
+                  </p>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         7. CONTACT SECTION (Source: parts/contact.html)
+    ========================================================== -->
+    <!-- =========================================================
+         7. CONTACT SECTION
+    ========================================================== -->
+    <section id="contact" class="py-20 sm:py-28 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="reveal rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-surface p-6 sm:p-10 lg:p-12 shadow-sm">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
+
+          <!-- Left: Direct Info & Quick-Copy Email -->
+          <div class="lg:col-span-5 flex flex-col justify-between space-y-8">
+            <div class="space-y-4">
+              <span class="font-mono text-xs uppercase tracking-widest text-indigo-500 font-medium">05 / Contact</span>
+              <h2 class="font-display text-3xl sm:text-4xl font-bold tracking-tight text-zinc-950 dark:text-white">
+                Let's build something great together.
+              </h2>
+              <p class="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                Have a web project in mind, need a full-stack developer, or looking to build a fast, scalable web application? Drop a message and I'll reply within 24 hours.
+              </p>
+            </div>
+
+            <div class="space-y-3.5">
+              <!-- Quick-Copy Email Widget -->
+              <div class="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/70 p-4 flex items-center justify-between gap-3">
+                <div class="min-w-0">
+                  <span class="block font-mono text-[10px] uppercase tracking-wider text-zinc-500">Direct Email</span>
+                  <a href="mailto:doeunmengsrengdev@gmail.com" id="emailText" class="block font-mono text-sm font-medium text-zinc-900 dark:text-zinc-100 hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors truncate">doeunmengsrengdev@gmail.com</a>
+                </div>
+                <button id="copyEmailBtn" type="button" class="shrink-0 inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-zinc-900 dark:bg-zinc-800 hover:bg-indigo-600 dark:hover:bg-indigo-600 text-white text-xs font-medium transition-colors shadow-sm active:scale-95" title="Copy Email">
+                  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                  <span id="copyEmailLabel">Copy</span>
+                </button>
+              </div>
+
+              <!-- Quick-Copy Telegram & QR Widget -->
+              <div class="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/70 p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div class="min-w-0">
+                  <div class="flex items-center gap-1.5">
+                    <span class="block font-mono text-[10px] uppercase tracking-wider text-sky-500 font-semibold">Telegram</span>
+                    <span class="inline-flex w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  </div>
+                    <a href="https://t.me/majesty_fury" target="_blank" rel="noopener noreferrer" id="telegramText" class="block font-mono text-sm font-medium text-zinc-900 dark:text-zinc-100 hover:text-sky-500 dark:hover:text-sky-400 transition-colors truncate">@majesty_fury</a>
+                </div>
+                <div class="flex items-center gap-2 shrink-0">
+                  <!-- QR Code Button -->
+                  <button id="openTelegramQrBtn" type="button" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 hover:border-sky-500/60 hover:text-sky-500 dark:hover:text-sky-400 text-zinc-700 dark:text-zinc-200 text-xs font-medium transition-all shadow-sm active:scale-95" title="View Telegram QR Code">
+                    <svg class="w-3.5 h-3.5 text-sky-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
+                    </svg>
+                    <span>QR Code</span>
+                  </button>
+                  <!-- Copy Telegram Username Button -->
+                  <button id="copyTelegramBtn" type="button" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-zinc-900 dark:bg-zinc-800 hover:bg-sky-600 dark:hover:bg-sky-600 text-white text-xs font-medium transition-colors shadow-sm active:scale-95" title="Copy Telegram Username">
+                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    </svg>
+                    <span id="copyTelegramLabel">Copy</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Developer Social Links (GitHub, LinkedIn, Telegram) -->
+              <div class="grid grid-cols-3 gap-2.5 pt-1">
+                <a href="https://github.com/furymeng" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border border-zinc-200 dark:border-zinc-800 hover:border-indigo-500/60 text-xs font-medium text-zinc-700 dark:text-zinc-300 hover:text-indigo-500 transition-colors">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                  <span>GitHub</span>
+                </a>
+                <a href="https://linkedin.com/in/furymeng" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border border-zinc-200 dark:border-zinc-800 hover:border-indigo-500/60 text-xs font-medium text-zinc-700 dark:text-zinc-300 hover:text-indigo-500 transition-colors">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                  <span>LinkedIn</span>
+                </a>
+                <a href="https://t.me/majesty_fury" target="_blank" rel="noopener noreferrer" aria-label="Telegram" class="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border border-zinc-200 dark:border-zinc-800 hover:border-sky-500/60 text-xs font-medium text-zinc-700 dark:text-zinc-300 hover:text-sky-500 transition-colors">
+                  <svg class="w-4 h-4 text-sky-500" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.832.921z"/>
+                  </svg>
+                  <span>Telegram</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Interactive Contact Form -->
+          <div class="lg:col-span-7">
+            <form id="contactForm" novalidate class="space-y-5">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="inputName" class="block text-xs font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-2">Your Name *</label>
+                  <input id="inputName" name="name" type="text" placeholder="Alex Rivera" required class="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/80 text-sm text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all" />
+                  <p id="errName" class="hidden text-xs text-rose-500 mt-1.5">Please enter your name.</p>
+                </div>
+                <div>
+                  <label for="inputEmail" class="block text-xs font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-2">Email Address *</label>
+                  <input id="inputEmail" name="email" type="email" placeholder="alex@company.com" required class="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/80 text-sm text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all" />
+                  <p id="errEmail" class="hidden text-xs text-rose-500 mt-1.5">Please enter a valid email address.</p>
+                </div>
+              </div>
+
+              <!-- Project Type Selector -->
+              <div>
+                <span class="block text-xs font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-2">Project Type</span>
+                <div class="grid grid-cols-3 gap-2.5" id="projectTypeGroup">
+                  <button type="button" data-type="Full-Stack" class="type-btn active py-2.5 px-3 rounded-xl text-xs font-medium border-2 border-indigo-500 bg-indigo-500/10 text-indigo-600 dark:text-indigo-300 transition-all">Full-Stack</button>
+                  <button type="button" data-type="Frontend" class="type-btn py-2.5 px-3 rounded-xl text-xs font-medium border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/80 text-zinc-700 dark:text-zinc-300 hover:border-indigo-500/50 transition-all">Frontend</button>
+                  <button type="button" data-type="Backend" class="type-btn py-2.5 px-3 rounded-xl text-xs font-medium border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/80 text-zinc-700 dark:text-zinc-300 hover:border-indigo-500/50 transition-all">Backend &amp; API</button>
+                </div>
+              </div>
+
+              <!-- Message -->
+              <div>
+                <label for="inputMessage" class="block text-xs font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-2">Project Brief *</label>
+                <textarea id="inputMessage" name="message" rows="4" placeholder="Tell me about your project, timeline, technical requirements, or tech stack..." required class="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/80 text-sm text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all resize-none"></textarea>
+                <p id="errMessage" class="hidden text-xs text-rose-500 mt-1.5">Please include a brief message (at least 10 characters).</p>
+              </div>
+
+              <!-- Submit -->
+              <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-1">
+                <button type="submit" id="submitInquiryBtn" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium shadow-glow transition-all active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed">
+                  <span id="submitBtnText">Send Inquiry</span>
+                  <svg id="submitBtnIcon" class="w-4 h-4 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </button>
+                <div class="flex items-center gap-2 text-xs text-zinc-500 dark:text-zinc-400">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                  <span>Direct delivery to doeunmengsrengdev@gmail.com</span>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================
+       FOOTER (Source: parts/footer.html)
+  ========================================================== -->
+  <!-- =========================================================
+       FOOTER
+  ========================================================== -->
+  <footer class="border-t border-zinc-200/80 dark:border-zinc-800/70 py-10">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2.5">
+        <span class="font-display font-bold text-sm text-zinc-900 dark:text-white">DM<span class="text-indigo-500">.</span></span>
+        <span class="text-xs text-zinc-500 dark:text-zinc-400">© 2026 Doune Memgsreng. Built with clean code in Phnom Penh.</span>
+      </div>
+      <a href="#top" class="inline-flex items-center gap-1.5 text-xs font-mono text-zinc-500 hover:text-indigo-500 transition-colors">
+        <span>Back to top</span>
+        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+        </svg>
+      </a>
+    </div>
+  </footer>
+
+  <!-- =========================================================
+       MODALS & TOAST (Source: parts/modals.html)
+  ========================================================== -->
+  <!-- =========================================================
+       TELEGRAM QR CODE MODAL
+  ========================================================== -->
+  <div id="telegramQrModal" 
+       class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 opacity-0 pointer-events-none transition-all duration-300 ease-out"
+       role="dialog"
+       aria-modal="true"
+       aria-labelledby="telegramQrTitle">
+    
+    <!-- Backdrop with blur -->
+    <div class="modal-backdrop absolute inset-0 bg-zinc-950/80 backdrop-blur-md transition-opacity"></div>
+
+    <!-- Scaled & Centered Modal Dialog -->
+    <div id="telegramQrContent" 
+         class="relative w-full max-w-sm sm:max-w-md bg-white dark:bg-surface rounded-3xl border border-zinc-200 dark:border-zinc-800 shadow-2xl p-6 sm:p-8 z-10 transform scale-90 opacity-0 transition-all duration-300 ease-out">
+      
+      <!-- Close button (top right) -->
+      <button type="button" id="closeTelegramQrBtn" class="absolute top-4 right-4 p-2 rounded-xl text-zinc-400 hover:text-zinc-600 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" aria-label="Close Telegram QR modal">
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      <!-- Header info -->
+      <div class="text-center space-y-2 mb-6">
+        <div class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-sky-500/10 text-sky-500 dark:bg-sky-500/20 mb-1">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.832.921z"/>
+          </svg>
+        </div>
+        <h3 id="telegramQrTitle" class="font-display text-xl font-bold text-zinc-950 dark:text-white">
+          Scan to Chat on Telegram
+        </h3>
+        <p class="text-xs text-zinc-500 dark:text-zinc-400">
+          Scan with your phone's camera or Telegram app to connect directly
+        </p>
+      </div>
+
+      <!-- QR Container -->
+      <div class="relative mx-auto w-56 h-56 sm:w-60 sm:h-60 p-4 rounded-2xl bg-white border border-zinc-200 dark:border-zinc-700/80 shadow-inner flex items-center justify-center">
+        <img id="telegramQrImage" 
+             src="profile/telegram-qr.svg" 
+             alt="Telegram QR Code for @majesty_fury" 
+             class="w-full h-full object-contain rounded-xl select-none no-lightbox" />
+        
+        <!-- Telegram Badge Overlay in Center -->
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div class="w-10 h-10 rounded-full bg-white dark:bg-zinc-900 p-1.5 shadow-md border border-zinc-200 dark:border-zinc-700 flex items-center justify-center">
+            <svg class="w-5 h-5 text-sky-500" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.832.921z"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Username & Action Buttons inside modal -->
+      <div class="mt-6 space-y-3">
+        <div class="flex items-center justify-between px-4 py-2.5 rounded-xl bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200/80 dark:border-zinc-700/60">
+          <div class="flex items-center gap-2 min-w-0">
+            <span class="font-mono text-xs text-zinc-400">Handle:</span>
+            <span class="font-mono text-xs font-semibold text-zinc-900 dark:text-zinc-100 truncate">@majesty_fury</span>
+          </div>
+          <button type="button" id="modalCopyTelegramBtn" class="shrink-0 text-xs font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300">
+            Copy
+          </button>
+        </div>
+
+        <a href="https://t.me/majesty_fury" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-sky-500 hover:bg-sky-600 text-white font-medium text-sm transition-colors shadow-sm active:scale-[0.98]">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.832.921z"/>
+          </svg>
+          <span>Open in Telegram (@majesty_fury)</span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =========================================================
+       IMAGE LIGHTBOX MODAL (SCALE & CENTER IN VIEWPORT WITH GRAY BACKDROP)
+  ========================================================== -->
+  <div id="imageModal" 
+       class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 opacity-0 pointer-events-none transition-opacity duration-300 ease-out cursor-zoom-out select-none"
+       role="dialog"
+       aria-modal="true"
+       aria-label="Image preview">
+    
+    <!-- Top-Right Floating Hint Pill -->
+    <div class="absolute top-4 right-4 sm:top-6 sm:right-6 z-20 flex items-center gap-2 px-3.5 py-2 rounded-full bg-zinc-800/90 text-zinc-200 border border-zinc-700/80 shadow-lg text-xs font-mono backdrop-blur-md transition-all pointer-events-none">
+      <span class="hidden sm:inline text-zinc-300">Click anywhere to close</span>
+      <span class="sm:hidden text-zinc-300">Close</span>
+      <kbd class="hidden sm:inline-block px-1.5 py-0.5 rounded bg-zinc-900/80 text-[10px] text-zinc-400 border border-zinc-700">ESC</kbd>
+      <svg class="w-4 h-4 text-zinc-300 ml-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </div>
+
+    <!-- Scaled & Centered Image Container -->
+    <div id="imageModalContent" 
+         class="relative max-w-4xl max-h-[85vh] flex flex-col items-center justify-center transform scale-90 opacity-0 transition-all duration-300 ease-out">
+      <img id="imageModalImg" 
+           src="" 
+           alt="Preview" 
+           class="max-w-[92vw] max-h-[80vh] md:max-w-2xl lg:max-w-3xl w-auto h-auto object-contain rounded-2xl shadow-2xl border border-white/10 dark:border-zinc-700/80 ring-1 ring-white/10 cursor-zoom-out" />
+      <p id="imageModalCaption" class="hidden mt-3 text-xs font-mono text-zinc-300 text-center bg-zinc-950/70 backdrop-blur-sm px-3.5 py-1.5 rounded-full border border-zinc-800/90 shadow-md"></p>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       TOAST NOTIFICATION CONTAINER
+  ========================================================== -->
+  <div id="toast" class="fixed bottom-5 right-5 z-50 translate-y-20 opacity-0 pointer-events-none transition-all duration-300">
+    <div class="flex items-center gap-3 px-4 py-3 rounded-2xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 shadow-xl text-sm font-medium text-zinc-900 dark:text-zinc-100">
+      <span class="flex items-center justify-center w-6 h-6 rounded-full bg-emerald-500/15 text-emerald-500">
+        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+        </svg>
+      </span>
+      <span id="toastMessage">Action completed</span>
+    </div>
+  </div>
+
+  <!-- Application JavaScript -->
+  <script src="js/main.js"></script>
+</body>
+</html>

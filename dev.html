@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Doune Memgsreng — Full-Stack Web Developer (Dev Mode)</title>
+  <meta name="description" content="Portfolio of Doune Memgsreng — Full-Stack Web Developer" />
+
+  <!-- Google Fonts: Space Grotesk (Display), Inter (Body), JetBrains Mono (Code/Meta) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"Space Grotesk"', 'sans-serif'],
+            sans: ['"Inter"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            obsidian: '#09090B',
+            surface: '#111115',
+            accent: {
+              DEFAULT: '#6366F1',
+              light: '#818CF8',
+              dark: '#4F46E5',
+            },
+          },
+          boxShadow: {
+            'glow': '0 0 40px -10px rgba(99, 102, 241, 0.35)',
+            'card-dark': '0 10px 30px -15px rgba(0, 0, 0, 0.7)',
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="bg-zinc-50 text-zinc-900 dark:bg-obsidian dark:text-zinc-100 font-sans antialiased selection:bg-indigo-500/30 selection:text-indigo-200 transition-colors duration-300 overflow-x-hidden">
+
+  <!-- Ambient Top Gradient Glow -->
+  <div class="pointer-events-none fixed inset-x-0 top-0 -z-10 h-[520px] overflow-hidden">
+    <div class="absolute left-1/2 top-[-140px] -translate-x-1/2 w-[780px] h-[360px] rounded-full bg-indigo-500/15 dark:bg-indigo-500/12 blur-[120px]"></div>
+    <div class="absolute right-[-80px] top-[60px] w-[360px] h-[360px] rounded-full bg-emerald-500/10 dark:bg-emerald-500/8 blur-[110px]"></div>
+  </div>
+
+  <!-- Dynamic Component Slots (Loaded via HTTP / Live Server) -->
+  <div data-include="parts/navbar.html"></div>
+
+  <main id="top" class="relative">
+    <div data-include="parts/hero.html"></div>
+    <div data-include="parts/work.html"></div>
+    <div data-include="parts/process.html"></div>
+    <div data-include="parts/stack.html"></div>
+    <div data-include="parts/about.html"></div>
+    <div data-include="parts/contact.html"></div>
+  </main>
+
+  <div data-include="parts/footer.html"></div>
+  <div data-include="parts/modals.html"></div>
+
+  <!-- Client-side Dynamic Component Loader -->
+  <script>
+    (async function () {
+      const slots = document.querySelectorAll('[data-include]');
+      for (const slot of slots) {
+        const file = slot.getAttribute('data-include');
+        try {
+          const res = await fetch(file);
+          if (res.ok) {
+            slot.outerHTML = await res.text();
+          } else {
+            console.error('Failed to load part:', file);
+          }
+        } catch (err) {
+          console.error('Error fetching part (requires HTTP server):', file, err);
+        }
+      }
+      // Load and execute main app script once all parts are injected into DOM
+      const script = document.createElement('script');
+      script.src = 'js/main.js';
+      document.body.appendChild(script);
+    })();
+  </script>
+</body>
+</html>
